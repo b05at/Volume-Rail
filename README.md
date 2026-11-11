@@ -14,8 +14,8 @@ Die App läuft als Bedienungshilfe-Dienst, startet also nach einem Neustart auto
 
 ## APK bauen
 
-Bei jedem Push auf `main` baut GitHub Actions die APK (unter *Actions → letzter Lauf → Artifacts*).
-Mit einem Tag `v1.0` usw. landet sie zusätzlich als Release-Datei `Volume-Rail.apk` im Repo.
+Bei jedem Push auf `main` baut GitHub Actions die APK und veröffentlicht sie als Release `v<versionName>` (Datei `Volume-Rail.apk`, siehe *Releases*).
+Für eine neue Version `versionCode` und `versionName` in `app/build.gradle` erhöhen – dann entsteht ein neues Release, sonst wird die APK im bestehenden ersetzt.
 
 Die APK ist mit einem festen Schlüssel (`app/volumerail.keystore`) signiert, damit sich neue Versionen über die alte installieren lassen.
 

@@ -35,8 +35,19 @@ jobs:
           name: Volume-Rail
           path: Volume-Rail.apk
 
+      - name: Version auslesen
+        id: ver
+        run: echo "name=$(grep -oP "versionName\s+'\K[^']+" app/build.gradle)" >> "$GITHUB_OUTPUT"
+
+      # Bei jedem Push auf main: Release v<versionName> anlegen bzw. APK darin ersetzen
       - name: Release veröffentlichen
-        if: startsWith(github.ref, 'refs/tags/v')
+        if: github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/v')
         uses: softprops/action-gh-release@v2
         with:
+          tag_name: v${{ steps.ver.outputs.name }}
+          name: Volume-Rail ${{ steps.ver.outputs.name }}
+          target_commitish: ${{ github.sha }}
+          body: |
+            Volume-Rail ${{ steps.ver.outputs.name }} – feinere Lautstärkestufen für das Sonoff NSPanel Pro.
+            Installieren: `adb install -r Volume-Rail.apk`
           files: Volume-Rail.apk
