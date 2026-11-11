@@ -1,0 +1,41 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'at.b05.volumerail'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId 'at.b05.volumerail'
+        minSdk 26
+        targetSdk 34
+        versionCode 1
+        versionName '1.0'
+    }
+
+    // Fester Schlüssel im Repo, damit sich neue Versionen über alte installieren lassen
+    signingConfigs {
+        volumerail {
+            storeFile file('volumerail.keystore')
+            storePassword 'volumerail'
+            keyAlias 'volumerail'
+            keyPassword 'volumerail'
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            signingConfig signingConfigs.volumerail
+        }
+        debug {
+            signingConfig signingConfigs.volumerail
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}

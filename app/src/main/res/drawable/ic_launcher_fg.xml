@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Lautsprecher -->
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M32,46h9l12,-10v36l-12,-10h-9z" />
+    <!-- feine Stufenbalken -->
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M59,57h3v-6h-3z M64,59h3v-10h-3z M69,61h3v-14h-3z M74,63h3v-18h-3z" />
+    <path
+        android:fillColor="#88FFFFFF"
+        android:pathData="M79,65h3v-22h-3z" />
+</vector>
