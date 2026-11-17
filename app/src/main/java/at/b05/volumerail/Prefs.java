@@ -12,7 +12,7 @@ final class Prefs {
     static final String CORRECT = "correct_jumps";
     static final String MAX_JUMP = "max_jump";
     static final String SUBSTEPS = "substeps";
-    static final String DB_TENTHS = "db_tenths";
+    static final String STRENGTH = "eq_strength";
     static final String FLOAT = "floating_buttons";
     static final String FLOAT_LEFT = "floating_left";
     static final String OVERLAY = "show_overlay";
@@ -21,8 +21,8 @@ final class Prefs {
     static final boolean DEF_INTERCEPT = true;
     static final boolean DEF_CORRECT = true;
     static final int DEF_MAX_JUMP = 5;
-    static final int DEF_SUBSTEPS = 1;
-    static final int DEF_DB_TENTHS = 15;
+    static final int DEF_SUBSTEPS = 4;
+    static final int DEF_STRENGTH = 10; // Zehntel: 10 = 100 %
     static final boolean DEF_FLOAT = false;
     static final boolean DEF_FLOAT_LEFT = false;
     static final boolean DEF_OVERLAY = true;

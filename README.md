@@ -7,7 +7,7 @@ Kleine Android-App (ab Android 8.0) für feinere Lautstärkestufen, gedacht für
 - **Lautstärketasten abfangen:** Jeder Druck auf Lauter/Leiser ändert nur um eine Feinstufe.
 - **Große Sprünge verkleinern:** Springt die Lautstärke um mehrere Stufen (z. B. über die +/- Tasten im Panel-Menü), setzt Volume-Rail sie sofort auf *eine* Feinstufe in dieselbe Richtung zurück. Wer am Schieberegler zieht oder weit springt (Grenze einstellbar), wird nicht gebremst.
 - **Rail** (optional): + / − Tasten am Bildschirmrand, gedrückt halten wiederholt.
-- **Zwischenstufen** (experimentell): teilt jede Systemstufe in 2–5 Teile, indem der Ton zusätzlich über einen globalen Equalizer leicht abgesenkt wird. Nur nötig, wenn schon eine einzelne Systemstufe zu grob ist.
+- **Feinstufen über den System-Equalizer:** teilt jede Systemstufe in bis zu 8 hörbare Feinstufen (Standard 4). Die Absenkung wird aus dem dB-Abstand der Systemstufen berechnet; in der App gibt es einen Hörtest für den Equalizer.
 - Wählbar für Medien, Wecker, Benachrichtigungen oder Klingelton.
 
 Die App läuft als Bedienungshilfe-Dienst, startet also nach einem Neustart automatisch wieder. Sie liest keine Bildschirminhalte.

@@ -111,7 +111,7 @@ public class FineVolumeService extends AccessibilityService
         if (key == null) return;
         if (key.equals(Prefs.FLOAT) || key.equals(Prefs.FLOAT_LEFT)) {
             updateFloating();
-        } else if (key.equals(Prefs.SUBSTEPS) || key.equals(Prefs.STREAM) || key.equals(Prefs.DB_TENTHS)) {
+        } else if (key.equals(Prefs.SUBSTEPS) || key.equals(Prefs.STREAM) || key.equals(Prefs.STRENGTH)) {
             if (vc != null) vc.reset();
         }
     }

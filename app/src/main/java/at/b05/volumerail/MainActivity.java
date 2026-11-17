@@ -179,24 +179,45 @@ public class MainActivity extends Activity {
                     }
                 },
                 "Größere Sprünge (z. B. Tippen weit auf den Regler) werden nicht verändert.");
-        stepper(c5, "Zwischenstufen je Systemstufe", Prefs.SUBSTEPS, Prefs.DEF_SUBSTEPS, 1, 5,
+        stepper(c5, "Feinstufen je Systemstufe", Prefs.SUBSTEPS, Prefs.DEF_SUBSTEPS, 1, 8,
                 new Fmt() {
                     @Override
                     public String f(int v) {
-                        return v == 1 ? "aus" : v + "×";
+                        return v == 1 ? "aus" : v + "\u00D7";
                     }
                 },
-                "Experimentell: teilt jede Systemstufe weiter auf, indem der Ton zusätzlich leicht abgesenkt wird. Nur nötig, wenn schon eine einzelne Systemstufe zu grob ist.");
-        stepper(c5, "Absenkung je Zwischenstufe", Prefs.DB_TENTHS, Prefs.DEF_DB_TENTHS, 5, 50,
+                "Teilt jede Systemstufe über den System-Equalizer in so viele hörbare Feinstufen.");
+        stepper(c5, "Stärke der Feinstufen", Prefs.STRENGTH, Prefs.DEF_STRENGTH, 3, 25,
                 new Fmt() {
                     @Override
                     public String f(int v) {
-                        return (v / 10) + "," + (v % 10) + " dB";
+                        return (v * 10) + " %";
                     }
                 },
-                "Passt die Zwischenstufen an den Abstand der Systemstufen an.");
+                "Wird es beim Lauter-Tippen an einer Stufengrenze kurz leiser, verringere den Wert. Macht es dort einen Sprung nach oben, erhöhe ihn.");
         eqInfo = text("", 12, AMBER);
-        c5.addView(eqInfo, wrap(dp(6)));
+        c5.addView(eqInfo, wrap(dp(8)));
+        final Button test = button("Equalizer testen (2 s leiser)");
+        test.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FineVolumeService svc = FineVolumeService.instance;
+                if (svc == null || svc.controller() == null) {
+                    Toast.makeText(MainActivity.this, "Dienst ist nicht aktiv.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                svc.controller().setTest(true);
+                h.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        FineVolumeService s2 = FineVolumeService.instance;
+                        if (s2 != null && s2.controller() != null) s2.controller().setTest(false);
+                    }
+                }, 2000);
+            }
+        });
+        c5.addView(test, wrap(dp(8)));
+        c5.addView(text("Spiel dabei Musik ab: Wird sie für 2 Sekunden deutlich leiser, funktioniert der Equalizer auf diesem Gerät.", 12, GRAY), wrap(dp(2)));
 
         setContentView(sv);
     }
@@ -253,10 +274,10 @@ public class MainActivity extends Activity {
                 seek.setMax(max);
                 seek.setProgress(v);
             }
-            eqInfo.setText(vc.subStepsSupported() ? ""
-                    : "Zwischenstufen werden von diesem Gerät nicht unterstützt.");
+            eqInfo.setText(vc.eqStatus());
         } else {
             levelText.setText("Systemstufe " + idx + " von " + maxIdx);
+            eqInfo.setText("");
             if (!seekTouch) {
                 seek.setMax(Math.max(1, maxIdx));
                 seek.setProgress(idx);
